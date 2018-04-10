@@ -1,8 +1,9 @@
 const Block = require('./Block');
 
 class Blockchain {
-	constructor() {
-		this.chain = [Block.genesis()];
+	constructor(account) {
+		this.chain = [Block.genesisAccount(account)];
+		this.account = account;
 	}
 
 	addBlock(data) {
@@ -13,8 +14,13 @@ class Blockchain {
 		return block;
 	}
 
-	isValidChain(chain) {
-		if(JSON.stringify(chain[0]) !== JSON.stringify(Block.genesis())) return false;
+	pendBlock(data) {
+
+		const block = Block
+	}
+
+	isValidChain(chain, wallet) {
+		if(JSON.stringify(chain[0]) !== JSON.stringify(Block.genesisAccount(wallet))) return false;
 	
 		for (let i = 1; i<chain.length; i++) {
 			const block = chain[i];
@@ -27,15 +33,18 @@ class Blockchain {
 		return true;
 	}
 
-	replaceChain(newChain) {
+	replaceChain(newChain, wallet) {
 
 		if (newChain.length <= this.chain.length) {
 			console.log('received chain is not longer than the current chain');
 			return;
-		} else if (!this.isValidChain(newChain)) {
+		}else if (this.account !== wallet) {
+			console.log('trying to change different chains');
+			return;
+		} else if (!this.isValidChain(newChain, wallet)) {
 			console.log('the received chain is not valid');
 			return;
-		}
+		} 
 
 		console.log('replacing blockchain with new chain');
 		this.chain = newChain;

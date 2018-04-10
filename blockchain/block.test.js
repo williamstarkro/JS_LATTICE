@@ -1,14 +1,12 @@
 const Block = require('./Block');
-const Wallet = require('../wallet');
 
 describe('Block', () => {
 
-	let data, lastBlock, block, wallet;
+	let data, lastBlock, block;
 
 	beforeEach(() => {
-		wallet = new Wallet();
 		data = 'bar';
-		lastBlock = Block.genesisAccount(wallet.publicKey);
+		lastBlock = Block.genesis();
 		block = Block.mineBlock(lastBlock, data);
 	});
 

@@ -22,8 +22,8 @@ class Block {
 		Data      : ${this.data}`;
 	}
 
-	static genesisAccount(account) {
-		return new this('Genesis', '-------', 'f1r57-h45h', [account],0, DIFFICULTY);
+	static genesis() {
+		return new this('Genesis Time', '-------', 'f1r57-h45h', [] ,0, DIFFICULTY );
 	}
 
 	static mineBlock(lastBlock, data) {

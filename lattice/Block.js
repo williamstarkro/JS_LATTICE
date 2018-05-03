@@ -26,7 +26,7 @@ class Block {
 		return new this('Genesis', '-------', 'f1r57-h45h', [account],0, DIFFICULTY);
 	}
 
-	static mineBlock(lastBlock, data) {
+	static mineBlock(lastBlock, data, wallet) {
 		const lastHash = lastBlock.hash;
 		let hash, timestamp;
 		let nonce = 0;
